@@ -1,9 +1,502 @@
 <!DOCTYPE html>
-<html>
-  <head><title>Squash Gateway</title></head>
-  <body>
-    <h1>Welcome to Squash Gateway!</h1>
-    <h1>here we alive</h1>
-    <p>The frontend is officially live.</p>
-  </body>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suryadev — Full-stack &amp; AI/ML Developer</title>
+<meta name="description" content="Portfolio of Suryadev — full-stack development, AI/ML integration, and Chrome extension engineering.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0B0E13;
+    --panel: #12161D;
+    --panel-2: #171C24;
+    --line: #232935;
+    --text: #E9EBEF;
+    --muted: #8891A0;
+    --accent: #5CE1D4;
+    --accent-2: #FF7A59;
+    --maxw: 760px;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: inherit; }
+
+  h1, h2, h3{
+    font-family: 'Space Grotesk', sans-serif;
+    margin: 0;
+    line-height: 1.15;
+  }
+
+  .layout{
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ---------- Left identity panel ---------- */
+  .side{
+    flex: 0 0 300px;
+    background: var(--panel);
+    border-right: 1px solid var(--line);
+    padding: 48px 36px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .side-top .mark{
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent), #2E8B84);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    color: #06110F;
+    font-size: 18px;
+    margin-bottom: 28px;
+  }
+
+  .side-top h1{
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .side-top .role{
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 14.5px;
+    max-width: 22ch;
+  }
+
+  .side-top .loc{
+    margin-top: 18px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+  }
+
+  nav{
+    margin-top: 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  nav a{
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 15px;
+    transition: color 0.2s ease;
+    width: fit-content;
+    border-bottom: 1px solid transparent;
+  }
+
+  nav a:hover, nav a:focus-visible{
+    color: var(--text);
+    border-bottom-color: var(--accent);
+  }
+
+  .side-bottom a{
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .side-bottom a:hover{ color: var(--text); }
+
+  /* ---------- Right content ---------- */
+  main{
+    flex: 1;
+    min-width: 0;
+    padding: 64px 48px 120px;
+  }
+
+  .content{
+    max-width: var(--maxw);
+    margin: 0 auto;
+  }
+
+  section{
+    padding-top: 90px;
+    scroll-margin-top: 40px;
+  }
+  section:first-of-type{ padding-top: 0; }
+
+  .intro p{
+    font-size: 19px;
+    color: var(--text);
+    max-width: 58ch;
+  }
+
+  .intro p + p{ margin-top: 16px; color: var(--muted); font-size: 16px; }
+
+  .section-head{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 14px;
+    margin-bottom: 36px;
+  }
+
+  .section-head h2{ font-size: 22px; font-weight: 600; }
+  .section-head span{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+
+  /* Projects */
+  .project{
+    padding: 34px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .project:first-of-type{ padding-top: 0; }
+  .project:last-of-type{ border-bottom: none; }
+
+  .project-head{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .project-head h3{ font-size: 20px; font-weight: 600; }
+
+  .project-tag{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--accent-2);
+    white-space: nowrap;
+  }
+
+  .project p.desc{
+    margin: 14px 0 18px;
+    color: var(--muted);
+    max-width: 62ch;
+    font-size: 15.5px;
+  }
+
+  .project ul.detail{
+    margin: 0 0 18px;
+    padding-left: 18px;
+    color: var(--muted);
+    font-size: 14.5px;
+  }
+  .project ul.detail li{ margin-bottom: 6px; }
+  .project ul.detail li::marker{ color: var(--accent); }
+
+  .chips{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .chip{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--text);
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    padding: 5px 10px;
+    border-radius: 6px;
+  }
+
+  /* Stack */
+  .stack-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px 40px;
+  }
+
+  .stack-group h3{
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: none;
+  }
+
+  .stack-group ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .stack-group li{
+    font-size: 15px;
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .stack-group li::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 5px;
+    height: 5px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  /* Contact */
+  .contact p{
+    color: var(--muted);
+    max-width: 50ch;
+    font-size: 16px;
+  }
+
+  .contact-links{
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .contact-links a{
+    text-decoration: none;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
+    transition: border-color 0.2s ease;
+  }
+
+  .contact-links a:hover{ border-color: var(--accent); }
+
+  footer.page-footer{
+    margin-top: 90px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 13px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  /* Entrance motion — one orchestrated reveal */
+  .side, main{
+    opacity: 0;
+    animation: rise 0.6s ease forwards;
+  }
+  main{ animation-delay: 0.12s; }
+
+  @keyframes rise{
+    from{ opacity: 0; transform: translateY(10px); }
+    to{ opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .side, main{ animation: none; opacity: 1; }
+    html{ scroll-behavior: auto; }
+  }
+
+  /* Mobile */
+  @media (max-width: 860px){
+    .layout{ flex-direction: column; }
+    .side{
+      position: relative;
+      height: auto;
+      flex: none;
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 24px;
+      padding: 28px 24px;
+    }
+    .side-top{ flex: 1 1 auto; }
+    .side-top .mark{ margin-bottom: 16px; }
+    nav{
+      flex-direction: row;
+      flex-wrap: wrap;
+      margin-top: 0;
+      gap: 18px;
+    }
+    .side-bottom{ width: 100%; }
+    main{ padding: 48px 24px 90px; }
+    .stack-grid{ grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <aside class="side">
+    <div class="side-top">
+      <div class="mark">S</div>
+      <h1>Suryadev</h1>
+      <p class="role">Full-stack developer working across AI/ML integration and Chrome extension engineering.</p>
+      <p class="loc">based in india</p>
+      <nav>
+        <a href="#work">Work</a>
+        <a href="#stack">Stack</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="side-bottom">
+      <!-- Replace with your real GitHub URL -->
+      <a href="https://github.com/" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38l-.01-1.49c-2.22.48-2.69-1.07-2.69-1.07-.36-.92-.89-1.16-.89-1.16-.72-.5.06-.49.06-.49.8.06 1.22.82 1.22.82.71 1.22 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.03 2.2-.82 2.2-.82.44 1.11.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48l-.01 2.2c0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        github
+      </a>
+    </div>
+  </aside>
+
+  <main>
+    <div class="content">
+
+      <section class="intro" id="intro">
+        <p>I build full-stack products end to end — from React/TypeScript frontends to Python backends — with a focus on AI/ML integration and browser-extension engineering.</p>
+        <p>Most of what I build starts as a demo built to work completely, not to look like it works: real backends, real data, no shortcuts.</p>
+      </section>
+
+      <section id="work">
+        <div class="section-head">
+          <h2>Work</h2>
+          <span>selected projects</span>
+        </div>
+
+        <article class="project">
+          <div class="project-head">
+            <h3>Squash Gateway</h3>
+            <span class="project-tag">tech cast — hackathon build</span>
+          </div>
+          <p class="desc">An enterprise platform that cuts AI API costs by compressing prompts before they ever reach the model. A Chrome extension intercepts prompts inside ChatGPT, Claude, and Gemini and compresses them in real time; a FastAPI backend handles routing, redaction, and token accounting.</p>
+          <ul class="detail">
+            <li>Compression engine built on Microsoft's LLMLingua-2 (XLM-RoBERTa-Large), with a frequency-based fallback</li>
+            <li>Four-layer safety system — length guard, dynamic ratio scaling, neural compression, and a context handbrake that reverts compression if negation words get dropped</li>
+            <li>PII redaction with round-trip restoration, tiktoken-based token counting, and multi-provider routing (OpenAI, Anthropic, Google, custom endpoints)</li>
+            <li>Manifest V3 extension using MutationObserver-based composer detection and a keyboard shortcut for one-tap compression</li>
+            <li>Dark-themed React/Vite/Tailwind dashboard with live backend data and usage charts</li>
+          </ul>
+          <div class="chips">
+            <span class="chip">React</span>
+            <span class="chip">Vite</span>
+            <span class="chip">Tailwind</span>
+            <span class="chip">FastAPI</span>
+            <span class="chip">Chrome Extension (MV3)</span>
+            <span class="chip">LLMLingua-2</span>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-head">
+            <h3>JOURNEY by NEXA</h3>
+            <span class="project-tag">demo build</span>
+          </div>
+          <p class="desc">A railway passenger-experience platform built as a full working demo — staff and admin tooling on top of a digital pass system, live station intelligence, and emergency handling.</p>
+          <ul class="detail">
+            <li>Separate React/TypeScript frontend and Python FastAPI backend</li>
+            <li>Nexa Pass digital ticketing, OTP and Google sign-in flows</li>
+            <li>Station intelligence with live crowd data and emergency request handling</li>
+            <li>Backend seeded with realistic data — 25 passengers, 2 trains, 10 stations, 2 routes</li>
+          </ul>
+          <div class="chips">
+            <span class="chip">React</span>
+            <span class="chip">TypeScript</span>
+            <span class="chip">FastAPI</span>
+            <span class="chip">Python</span>
+          </div>
+        </article>
+      </section>
+
+      <section id="stack">
+        <div class="section-head">
+          <h2>Stack</h2>
+          <span>tools I reach for</span>
+        </div>
+        <div class="stack-grid">
+          <div class="stack-group">
+            <h3>frontend</h3>
+            <ul>
+              <li>React</li>
+              <li>TypeScript</li>
+              <li>Vite</li>
+              <li>Tailwind CSS</li>
+            </ul>
+          </div>
+          <div class="stack-group">
+            <h3>backend</h3>
+            <ul>
+              <li>Python</li>
+              <li>FastAPI</li>
+            </ul>
+          </div>
+          <div class="stack-group">
+            <h3>ai / ml</h3>
+            <ul>
+              <li>Prompt compression (LLMLingua-2)</li>
+              <li>Multi-provider LLM routing</li>
+              <li>Token-aware pipelines</li>
+            </ul>
+          </div>
+          <div class="stack-group">
+            <h3>extensions</h3>
+            <ul>
+              <li>Chrome Extensions (Manifest V3)</li>
+              <li>DOM injection &amp; observers</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact" id="contact">
+        <div class="section-head">
+          <h2>Contact</h2>
+          <span>get in touch</span>
+        </div>
+        <p>Open to internships, collaborations, and interesting technical problems.</p>
+        <div class="contact-links">
+          <!-- Replace the placeholders below with your real details -->
+          <a href="mailto:you@example.com">you@example.com</a>
+          <a href="https://github.com/" target="_blank" rel="noopener">github.com/your-username</a>
+          <a href="https://linkedin.com/" target="_blank" rel="noopener">linkedin.com/in/your-profile</a>
+        </div>
+      </section>
+
+      <footer class="page-footer">
+        built by suryadev
+      </footer>
+
+    </div>
+  </main>
+
+</div>
+
+</body>
 </html>
