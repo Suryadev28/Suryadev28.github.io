@@ -10,19 +10,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #0B0E13;
-    --panel: #12161D;
-    --panel-2: #171C24;
-    --line: #232935;
-    --text: #E9EBEF;
+    --bg: #08090C;
+    --panel: #101319;
+    --panel-2: #151A22;
+    --line: #232A36;
+    --text: #ECEEF2;
     --muted: #8891A0;
     --accent: #5CE1D4;
-    --accent-2: #FF7A59;
-    --maxw: 760px;
+    --accent-2: #8B7CF6;
+    --accent-3: #FF7A59;
+    --maxw: 1120px;
   }
 
   *{ box-sizing: border-box; }
-
   html{ scroll-behavior: smooth; }
 
   body{
@@ -32,471 +32,537 @@
     font-family: 'IBM Plex Sans', -apple-system, sans-serif;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
 
   a{ color: inherit; }
+  h1, h2, h3{ font-family: 'Space Grotesk', sans-serif; margin: 0; line-height: 1.08; }
 
-  h1, h2, h3{
-    font-family: 'Space Grotesk', sans-serif;
-    margin: 0;
-    line-height: 1.15;
+  .wrap{ max-width: var(--maxw); margin: 0 auto; padding: 0 48px; }
+
+  /* ---------- Top nav ---------- */
+  header.topnav{
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    background: rgba(8,9,12,0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
   }
-
-  .layout{
-    display: flex;
-    min-height: 100vh;
-  }
-
-  /* ---------- Left identity panel ---------- */
-  .side{
-    flex: 0 0 300px;
-    background: var(--panel);
-    border-right: 1px solid var(--line);
-    padding: 48px 36px;
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .side-top .mark{
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, var(--accent), #2E8B84);
+  .topnav .wrap{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    height: 68px;
+  }
+  .brand{
+    display: flex;
+    align-items: center;
+    gap: 10px;
     font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    color: #06110F;
-    font-size: 18px;
-    margin-bottom: 28px;
-  }
-
-  .side-top h1{
-    font-size: 26px;
     font-weight: 600;
-    letter-spacing: -0.01em;
+    font-size: 16px;
+    text-decoration: none;
   }
-
-  .side-top .role{
-    margin-top: 10px;
+  .brand .dot{
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 14px 2px rgba(92,225,212,0.55);
+  }
+  .topnav nav{ display: flex; gap: 32px; }
+  .topnav nav a{
+    text-decoration: none;
     color: var(--muted);
     font-size: 14.5px;
-    max-width: 22ch;
+    transition: color 0.2s ease;
   }
+  .topnav nav a:hover{ color: var(--text); }
 
-  .side-top .loc{
-    margin-top: 18px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    color: var(--accent);
-  }
-
-  nav{
-    margin-top: 44px;
+  /* ---------- Hero ---------- */
+  .hero{
+    position: relative;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    justify-content: center;
+    padding-top: 68px;
+    overflow: hidden;
   }
-
-  nav a{
-    text-decoration: none;
+  #particles{
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.55;
+  }
+  .hero .wrap{
+    position: relative;
+    z-index: 1;
+  }
+  .hero .eyebrow{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 22px;
+    letter-spacing: 0.02em;
+  }
+  .hero h1{
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    max-width: 14ch;
+  }
+  .hero .role-line{
+    margin-top: 26px;
+    font-size: clamp(17px, 2vw, 21px);
     color: var(--muted);
-    font-size: 15px;
-    transition: color 0.2s ease;
-    width: fit-content;
-    border-bottom: 1px solid transparent;
+    max-width: 46ch;
   }
-
-  nav a:hover, nav a:focus-visible{
+  .hero .role-line b{ color: var(--text); font-weight: 500; }
+  .hero .meta-row{
+    margin-top: 40px;
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .hero .meta-row a{
+    text-decoration: none;
+    font-size: 14.5px;
     color: var(--text);
-    border-bottom-color: var(--accent);
-  }
-
-  .side-bottom a{
-    text-decoration: none;
-    color: var(--muted);
-    font-size: 14px;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-  }
-
-  .side-bottom a:hover{ color: var(--text); }
-
-  /* ---------- Right content ---------- */
-  main{
-    flex: 1;
-    min-width: 0;
-    padding: 64px 48px 120px;
-  }
-
-  .content{
-    max-width: var(--maxw);
-    margin: 0 auto;
-  }
-
-  section{
-    padding-top: 90px;
-    scroll-margin-top: 40px;
-  }
-  section:first-of-type{ padding-top: 0; }
-
-  .intro p{
-    font-size: 19px;
-    color: var(--text);
-    max-width: 58ch;
-  }
-
-  .intro p + p{ margin-top: 16px; color: var(--muted); font-size: 16px; }
-
-  .section-head{
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
     border-bottom: 1px solid var(--line);
-    padding-bottom: 14px;
-    margin-bottom: 36px;
+    padding-bottom: 3px;
+    transition: border-color 0.2s ease, color 0.2s ease;
   }
-
-  .section-head h2{ font-size: 22px; font-weight: 600; }
-  .section-head span{
+  .hero .meta-row a:hover{ border-color: var(--accent); color: var(--accent); }
+  .hero .meta-row span.loc{
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 12.5px;
+    font-size: 13px;
     color: var(--muted);
+  }
+  .scroll-cue{
+    position: absolute;
+    bottom: 36px;
+    left: 48px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .scroll-cue .line{
+    width: 26px; height: 1px;
+    background: var(--muted);
+    animation: pulse-w 2.2s ease-in-out infinite;
+  }
+  @keyframes pulse-w{ 0%,100%{ opacity: 0.4; } 50%{ opacity: 1; } }
+
+  /* ---------- Sections ---------- */
+  section{ padding: 130px 0; border-top: 1px solid var(--line); }
+  section:first-of-type{ border-top: none; }
+
+  .section-label{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .section-title{
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 600;
+    max-width: 20ch;
+    margin-bottom: 64px;
   }
 
   /* Projects */
   .project{
-    padding: 34px 0;
-    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    padding: 72px 0;
+    border-top: 1px solid var(--line);
   }
-  .project:first-of-type{ padding-top: 0; }
-  .project:last-of-type{ border-bottom: none; }
+  .project:first-of-type{ border-top: none; padding-top: 0; }
+  .project:last-of-type{ padding-bottom: 0; }
+  .project.reverse{ direction: rtl; }
+  .project.reverse > *{ direction: ltr; }
 
-  .project-head{
+  .project-visual{
+    aspect-ratio: 4/3;
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    position: relative;
+    overflow: hidden;
     display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
   }
-
-  .project-head h3{ font-size: 20px; font-weight: 600; }
+  .project-visual svg{ width: 78%; height: 78%; }
 
   .project-tag{
     font-family: 'IBM Plex Mono', monospace;
     font-size: 12px;
-    color: var(--accent-2);
-    white-space: nowrap;
+    color: var(--accent-3);
+    display: inline-block;
+    margin-bottom: 14px;
   }
+  .project h3{ font-size: 28px; font-weight: 600; margin-bottom: 16px; }
+  .project p.desc{ color: var(--muted); font-size: 16px; max-width: 52ch; margin-bottom: 24px; }
 
-  .project p.desc{
-    margin: 14px 0 18px;
+  .stat-row{
+    display: flex;
+    gap: 32px;
+    margin-bottom: 26px;
+    flex-wrap: wrap;
+  }
+  .stat .num{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--accent);
+    display: block;
+  }
+  .stat .label{
+    font-size: 12.5px;
     color: var(--muted);
-    max-width: 62ch;
-    font-size: 15.5px;
+    max-width: 16ch;
   }
 
   .project ul.detail{
-    margin: 0 0 18px;
+    margin: 0 0 22px;
     padding-left: 18px;
     color: var(--muted);
     font-size: 14.5px;
   }
-  .project ul.detail li{ margin-bottom: 6px; }
-  .project ul.detail li::marker{ color: var(--accent); }
+  .project ul.detail li{ margin-bottom: 7px; }
+  .project ul.detail li::marker{ color: var(--accent-2); }
 
-  .chips{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
+  .chips{ display: flex; flex-wrap: wrap; gap: 8px; }
   .chip{
     font-family: 'IBM Plex Mono', monospace;
     font-size: 12px;
     color: var(--text);
     background: var(--panel-2);
     border: 1px solid var(--line);
-    padding: 5px 10px;
+    padding: 6px 11px;
     border-radius: 6px;
   }
 
   /* Stack */
   .stack-grid{
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 28px 40px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
   }
-
-  .stack-group h3{
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--muted);
-    margin-bottom: 12px;
+  .stack-group h4{
     font-family: 'IBM Plex Mono', monospace;
-    text-transform: none;
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 16px;
   }
-
-  .stack-group ul{
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .stack-group li{
-    font-size: 15px;
-    padding-left: 14px;
-    position: relative;
-  }
-
+  .stack-group ul{ list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .stack-group li{ font-size: 15.5px; padding-left: 16px; position: relative; }
   .stack-group li::before{
     content: '';
-    position: absolute;
-    left: 0;
-    top: 9px;
-    width: 5px;
-    height: 5px;
-    background: var(--accent);
-    border-radius: 50%;
+    position: absolute; left: 0; top: 9px;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent-2);
   }
 
   /* Contact */
-  .contact p{
-    color: var(--muted);
-    max-width: 50ch;
-    font-size: 16px;
-  }
-
-  .contact-links{
-    margin-top: 24px;
+  .contact-inner{
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 40px;
   }
-
+  .contact h2{
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 600;
+    max-width: 14ch;
+  }
+  .contact-links{ display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
   .contact-links a{
     text-decoration: none;
-    font-size: 16px;
+    font-size: 17px;
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    width: fit-content;
     border-bottom: 1px solid var(--line);
-    padding-bottom: 2px;
-    transition: border-color 0.2s ease;
+    padding-bottom: 4px;
+    transition: border-color 0.2s ease, color 0.2s ease;
   }
-
-  .contact-links a:hover{ border-color: var(--accent); }
+  .contact-links a:hover{ border-color: var(--accent); color: var(--accent); }
 
   footer.page-footer{
-    margin-top: 90px;
-    padding-top: 24px;
-    border-top: 1px solid var(--line);
+    padding: 32px 0 48px;
     color: var(--muted);
     font-size: 13px;
     font-family: 'IBM Plex Mono', monospace;
   }
+  footer.page-footer .wrap{ display: flex; justify-content: space-between; }
 
-  /* Entrance motion — one orchestrated reveal */
-  .side, main{
+  /* Entrance */
+  .hero > .wrap > *{
     opacity: 0;
-    animation: rise 0.6s ease forwards;
+    animation: rise 0.7s ease forwards;
   }
-  main{ animation-delay: 0.12s; }
-
-  @keyframes rise{
-    from{ opacity: 0; transform: translateY(10px); }
-    to{ opacity: 1; transform: translateY(0); }
-  }
+  .hero .eyebrow{ animation-delay: 0.05s; }
+  .hero h1{ animation-delay: 0.15s; }
+  .hero .role-line{ animation-delay: 0.28s; }
+  .hero .meta-row{ animation-delay: 0.4s; }
+  @keyframes rise{ from{ opacity:0; transform: translateY(14px);} to{opacity:1; transform: translateY(0);} }
 
   @media (prefers-reduced-motion: reduce){
-    .side, main{ animation: none; opacity: 1; }
+    .hero > .wrap > *{ animation: none; opacity: 1; }
     html{ scroll-behavior: auto; }
+    .scroll-cue .line{ animation: none; }
+    #particles{ display: none; }
   }
 
-  /* Mobile */
-  @media (max-width: 860px){
-    .layout{ flex-direction: column; }
-    .side{
-      position: relative;
-      height: auto;
-      flex: none;
-      border-right: none;
-      border-bottom: 1px solid var(--line);
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 24px;
-      padding: 28px 24px;
-    }
-    .side-top{ flex: 1 1 auto; }
-    .side-top .mark{ margin-bottom: 16px; }
-    nav{
-      flex-direction: row;
-      flex-wrap: wrap;
-      margin-top: 0;
-      gap: 18px;
-    }
-    .side-bottom{ width: 100%; }
-    main{ padding: 48px 24px 90px; }
-    .stack-grid{ grid-template-columns: 1fr; }
+  @media (max-width: 900px){
+    .wrap{ padding: 0 24px; }
+    .topnav nav{ display: none; }
+    .project{ grid-template-columns: 1fr; }
+    .project.reverse{ direction: ltr; }
+    .stack-grid{ grid-template-columns: repeat(2, 1fr); }
+    .contact-inner{ align-items: flex-start; }
+    .scroll-cue{ left: 24px; }
   }
 </style>
 </head>
 <body>
 
-<div class="layout">
+<header class="topnav">
+  <div class="wrap">
+    <a href="#" class="brand"><span class="dot"></span>Suryadev</a>
+    <nav>
+      <a href="#work">Work</a>
+      <a href="#stack">Stack</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
 
-  <aside class="side">
-    <div class="side-top">
-      <div class="mark">S</div>
-      <h1>Suryadev</h1>
-      <p class="role">Full-stack developer working across AI/ML integration and Chrome extension engineering.</p>
-      <p class="loc">based in india</p>
-      <nav>
-        <a href="#work">Work</a>
-        <a href="#stack">Stack</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
-    <div class="side-bottom">
+<section class="hero">
+  <canvas id="particles"></canvas>
+  <div class="wrap">
+    <div class="eyebrow">full-stack &amp; ai/ml developer</div>
+    <h1>Building systems that actually work end to end.</h1>
+    <p class="role-line">I'm Suryadev — I build <b>full-stack products</b>, wire up <b>AI/ML pipelines</b>, and ship <b>Chrome extensions</b> that inject deep into real browser workflows. Demos that run on real data, not screenshots.</p>
+    <div class="meta-row">
+      <span class="loc">based in india</span>
       <!-- Replace with your real GitHub URL -->
-      <a href="https://github.com/" target="_blank" rel="noopener">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38l-.01-1.49c-2.22.48-2.69-1.07-2.69-1.07-.36-.92-.89-1.16-.89-1.16-.72-.5.06-.49.06-.49.8.06 1.22.82 1.22.82.71 1.22 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.03 2.2-.82 2.2-.82.44 1.11.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48l-.01 2.2c0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
-        github
-      </a>
+      <a href="https://github.com/" target="_blank" rel="noopener">github ↗</a>
+      <a href="https://www.linkedin.com/in/suryadev-sinh-b05600362/" target="_blank" rel="noopener">linkedin ↗</a>
     </div>
-  </aside>
+  </div>
+  <div class="scroll-cue"><span class="line"></span>scroll</div>
+</section>
 
-  <main>
-    <div class="content">
+<section id="work">
+  <div class="wrap">
+    <div class="section-label">selected work</div>
+    <h2 class="section-title">Two products, built to be genuinely finished.</h2>
 
-      <section class="intro" id="intro">
-        <p>I build full-stack products end to end — from React/TypeScript frontends to Python backends — with a focus on AI/ML integration and browser-extension engineering.</p>
-        <p>Most of what I build starts as a demo built to work completely, not to look like it works: real backends, real data, no shortcuts.</p>
-      </section>
-
-      <section id="work">
-        <div class="section-head">
-          <h2>Work</h2>
-          <span>selected projects</span>
+    <article class="project">
+      <div class="project-visual">
+        <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="14" y="20" width="72" height="14" rx="3" stroke="var(--accent)" stroke-width="1.5" opacity="0.9"/>
+          <rect x="14" y="42" width="52" height="14" rx="3" stroke="var(--accent)" stroke-width="1.5" opacity="0.6"/>
+          <path d="M96 27 H150" stroke="var(--accent-2)" stroke-width="1.5" stroke-dasharray="3 4"/>
+          <path d="M96 49 H130" stroke="var(--accent-2)" stroke-width="1.5" stroke-dasharray="3 4"/>
+          <rect x="150" y="16" width="36" height="20" rx="4" stroke="var(--accent-3)" stroke-width="1.5"/>
+          <text x="168" y="29" font-family="IBM Plex Mono" font-size="8" fill="var(--accent-3)" text-anchor="middle">42%</text>
+          <rect x="130" y="40" width="26" height="16" rx="4" stroke="var(--accent-3)" stroke-width="1.5"/>
+          <text x="143" y="51" font-family="IBM Plex Mono" font-size="7" fill="var(--accent-3)" text-anchor="middle">61%</text>
+          <line x1="14" y1="90" x2="186" y2="90" stroke="var(--line)" stroke-width="1"/>
+          <polyline points="14,120 40,105 66,128 92,98 118,112 144,86 170,100" stroke="var(--accent)" stroke-width="2" fill="none"/>
+          <circle cx="118" cy="112" r="3" fill="var(--accent)"/>
+        </svg>
+      </div>
+      <div>
+        <span class="project-tag">tech cast — hackathon build</span>
+        <h3>Squash Gateway</h3>
+        <p class="desc">An enterprise platform that cuts AI API costs by compressing prompts before they reach the model — live, inside the chat window.</p>
+        <div class="stat-row">
+          <div class="stat"><span class="num">4</span><span class="label">layer safety pipeline</span></div>
+          <div class="stat"><span class="num">3</span><span class="label">providers routed</span></div>
+          <div class="stat"><span class="num">MV3</span><span class="label">Chrome extension</span></div>
         </div>
-
-        <article class="project">
-          <div class="project-head">
-            <h3>Squash Gateway</h3>
-            <span class="project-tag">tech cast — hackathon build</span>
-          </div>
-          <p class="desc">An enterprise platform that cuts AI API costs by compressing prompts before they ever reach the model. A Chrome extension intercepts prompts inside ChatGPT, Claude, and Gemini and compresses them in real time; a FastAPI backend handles routing, redaction, and token accounting.</p>
-          <ul class="detail">
-            <li>Compression engine built on Microsoft's LLMLingua-2 (XLM-RoBERTa-Large), with a frequency-based fallback</li>
-            <li>Four-layer safety system — length guard, dynamic ratio scaling, neural compression, and a context handbrake that reverts compression if negation words get dropped</li>
-            <li>PII redaction with round-trip restoration, tiktoken-based token counting, and multi-provider routing (OpenAI, Anthropic, Google, custom endpoints)</li>
-            <li>Manifest V3 extension using MutationObserver-based composer detection and a keyboard shortcut for one-tap compression</li>
-            <li>Dark-themed React/Vite/Tailwind dashboard with live backend data and usage charts</li>
-          </ul>
-          <div class="chips">
-            <span class="chip">React</span>
-            <span class="chip">Vite</span>
-            <span class="chip">Tailwind</span>
-            <span class="chip">FastAPI</span>
-            <span class="chip">Chrome Extension (MV3)</span>
-            <span class="chip">LLMLingua-2</span>
-          </div>
-        </article>
-
-        <article class="project">
-          <div class="project-head">
-            <h3>JOURNEY by NEXA</h3>
-            <span class="project-tag">demo build</span>
-          </div>
-          <p class="desc">A railway passenger-experience platform built as a full working demo — staff and admin tooling on top of a digital pass system, live station intelligence, and emergency handling.</p>
-          <ul class="detail">
-            <li>Separate React/TypeScript frontend and Python FastAPI backend</li>
-            <li>Nexa Pass digital ticketing, OTP and Google sign-in flows</li>
-            <li>Station intelligence with live crowd data and emergency request handling</li>
-            <li>Backend seeded with realistic data — 25 passengers, 2 trains, 10 stations, 2 routes</li>
-          </ul>
-          <div class="chips">
-            <span class="chip">React</span>
-            <span class="chip">TypeScript</span>
-            <span class="chip">FastAPI</span>
-            <span class="chip">Python</span>
-          </div>
-        </article>
-      </section>
-
-      <section id="stack">
-        <div class="section-head">
-          <h2>Stack</h2>
-          <span>tools I reach for</span>
+        <ul class="detail">
+          <li>Compression engine on Microsoft's LLMLingua-2 (XLM-RoBERTa-Large), with a frequency-based fallback</li>
+          <li>Safety net: length guard, dynamic ratio scaling, neural compression, and a context handbrake that reverts if negation words get dropped</li>
+          <li>PII redaction with round-trip restoration and tiktoken-based token accounting</li>
+          <li>MutationObserver-based composer detection with a one-tap keyboard shortcut</li>
+        </ul>
+        <div class="chips">
+          <span class="chip">React</span><span class="chip">Vite</span><span class="chip">Tailwind</span>
+          <span class="chip">FastAPI</span><span class="chip">Chrome Extension</span><span class="chip">LLMLingua-2</span>
         </div>
-        <div class="stack-grid">
-          <div class="stack-group">
-            <h3>frontend</h3>
-            <ul>
-              <li>React</li>
-              <li>TypeScript</li>
-              <li>Vite</li>
-              <li>Tailwind CSS</li>
-            </ul>
-          </div>
-          <div class="stack-group">
-            <h3>backend</h3>
-            <ul>
-              <li>Python</li>
-              <li>FastAPI</li>
-            </ul>
-          </div>
-          <div class="stack-group">
-            <h3>ai / ml</h3>
-            <ul>
-              <li>Prompt compression (LLMLingua-2)</li>
-              <li>Multi-provider LLM routing</li>
-              <li>Token-aware pipelines</li>
-            </ul>
-          </div>
-          <div class="stack-group">
-            <h3>extensions</h3>
-            <ul>
-              <li>Chrome Extensions (Manifest V3)</li>
-              <li>DOM injection &amp; observers</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+      </div>
+    </article>
 
-      <section class="contact" id="contact">
-        <div class="section-head">
-          <h2>Contact</h2>
-          <span>get in touch</span>
+    <article class="project reverse">
+      <div class="project-visual">
+        <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="20" y1="80" x2="180" y2="80" stroke="var(--line)" stroke-width="2"/>
+          <circle cx="30" cy="80" r="5" fill="var(--accent)"/>
+          <circle cx="75" cy="80" r="5" fill="var(--accent-2)"/>
+          <circle cx="120" cy="80" r="5" fill="var(--accent)"/>
+          <circle cx="170" cy="80" r="5" fill="var(--accent-3)"/>
+          <rect x="10" y="30" width="40" height="22" rx="4" stroke="var(--accent)" stroke-width="1.5"/>
+          <text x="30" y="44" font-family="IBM Plex Mono" font-size="7" fill="var(--accent)" text-anchor="middle">PASS</text>
+          <rect x="150" y="100" width="40" height="22" rx="4" stroke="var(--accent-3)" stroke-width="1.5"/>
+          <text x="170" y="114" font-family="IBM Plex Mono" font-size="7" fill="var(--accent-3)" text-anchor="middle">ALERT</text>
+          <path d="M30 80 V52" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="2 3"/>
+          <path d="M170 80 V100" stroke="var(--accent-3)" stroke-width="1.2" stroke-dasharray="2 3"/>
+        </svg>
+      </div>
+      <div>
+        <span class="project-tag">demo build</span>
+        <h3>JOURNEY by NEXA</h3>
+        <p class="desc">A railway passenger-experience platform — staff and admin tooling built on top of a digital pass system, live station intelligence, and emergency handling.</p>
+        <div class="stat-row">
+          <div class="stat"><span class="num">25</span><span class="label">passengers seeded</span></div>
+          <div class="stat"><span class="num">10</span><span class="label">stations modeled</span></div>
+          <div class="stat"><span class="num">2</span><span class="label">roles: staff &amp; admin</span></div>
         </div>
-        <p>Open to internships, collaborations, and interesting technical problems.</p>
-        <div class="contact-links">
-          <!-- Replace the placeholders below with your real details -->
-          <a href="mailto:you@example.com">you@example.com</a>
-          <a href="https://github.com/" target="_blank" rel="noopener">github.com/your-username</a>
-          <a href="https://linkedin.com/" target="_blank" rel="noopener">linkedin.com/in/your-profile</a>
+        <ul class="detail">
+          <li>Separate React/TypeScript frontend and Python FastAPI backend</li>
+          <li>Nexa Pass digital ticketing, OTP and Google sign-in flows</li>
+          <li>Live station crowd data and emergency request handling</li>
+          <li>Backend seeded with 2 trains and 2 routes across 10 stations</li>
+        </ul>
+        <div class="chips">
+          <span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">FastAPI</span><span class="chip">Python</span>
         </div>
-      </section>
+      </div>
+    </article>
+  </div>
+</section>
 
-      <footer class="page-footer">
-        built by suryadev
-      </footer>
-
+<section id="stack">
+  <div class="wrap">
+    <div class="section-label">tooling</div>
+    <h2 class="section-title">What I reach for.</h2>
+    <div class="stack-grid">
+      <div class="stack-group">
+        <h4>frontend</h4>
+        <ul><li>React</li><li>TypeScript</li><li>Vite</li><li>Tailwind CSS</li></ul>
+      </div>
+      <div class="stack-group">
+        <h4>backend</h4>
+        <ul><li>Python</li><li>FastAPI</li></ul>
+      </div>
+      <div class="stack-group">
+        <h4>ai / ml</h4>
+        <ul><li>Prompt compression (LLMLingua-2)</li><li>Multi-provider LLM routing</li><li>Token-aware pipelines</li></ul>
+      </div>
+      <div class="stack-group">
+        <h4>extensions</h4>
+        <ul><li>Chrome Extensions (MV3)</li><li>DOM injection &amp; observers</li></ul>
+      </div>
     </div>
-  </main>
+  </div>
+</section>
 
-</div>
+<section id="contact">
+  <div class="wrap">
+    <div class="section-label">get in touch</div>
+    <div class="contact-inner">
+      <h2>Open to internships, collaborations, and hard problems.</h2>
+      <div class="contact-links">
+        <!-- Replace the placeholders below with your real details -->
+        <a href="mailto:you@example.com">you@example.com</a>
+        <a href="https://github.com/" target="_blank" rel="noopener">github.com/your-username</a>
+        <a href="https://www.linkedin.com/in/suryadev-sinh-b05600362/" target="_blank" rel="noopener">linkedin.com/in/suryadev-sinh</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="page-footer">
+  <div class="wrap">
+    <span>built by suryadev</span>
+    <span id="year"></span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Subtle particle field: nodes drifting, with connecting lines (nod to Squash Gateway's compression visual)
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canvas = document.getElementById('particles');
+  if (canvas && !reduceMotion) {
+    var ctx = canvas.getContext('2d');
+    var hero = canvas.parentElement;
+    var W, H, particles = [];
+    var N = 60;
+
+    function resize(){
+      W = canvas.width = hero.offsetWidth;
+      H = canvas.height = hero.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    function rand(a,b){ return a + Math.random()*(b-a); }
+
+    for (var i=0; i<N; i++){
+      particles.push({
+        x: rand(0,W), y: rand(0,H),
+        vx: rand(-0.15,0.15), vy: rand(-0.1,0.1),
+        r: rand(1,2.2)
+      });
+    }
+
+    var colors = ['92,225,212', '139,124,246'];
+
+    function tick(){
+      ctx.clearRect(0,0,W,H);
+      for (var i=0;i<particles.length;i++){
+        var p = particles[i];
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+        if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+      }
+      for (var i=0;i<particles.length;i++){
+        for (var j=i+1;j<particles.length;j++){
+          var a = particles[i], b = particles[j];
+          var dx = a.x-b.x, dy = a.y-b.y;
+          var d = Math.sqrt(dx*dx+dy*dy);
+          if (d < 110){
+            ctx.strokeStyle = 'rgba(92,225,212,' + (0.12*(1-d/110)) + ')';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y);
+            ctx.stroke();
+          }
+        }
+      }
+      for (var i=0;i<particles.length;i++){
+        var p = particles[i];
+        var c = colors[i % colors.length];
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(' + c + ',0.85)';
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fill();
+      }
+      requestAnimationFrame(tick);
+    }
+    tick();
+  }
+</script>
 
 </body>
 </html>
